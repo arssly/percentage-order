@@ -1,3 +1,6 @@
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import CssBaseline from "@mui/material/CssBaseline";
+
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,7 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <CssBaseline />
+          {children}
+        </AppRouterCacheProvider>
+      </body>
     </html>
   );
 }
