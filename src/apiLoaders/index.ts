@@ -27,6 +27,6 @@ export async function fetchMarkets() {
 
   // transform huge data to usable small data
   // so that we only send what we need to the client
-  const transformedData = rawData.results.map(transformMarket);
+  const transformedData: Market[] = rawData.results.map(transformMarket);
   return transformedData;
 }

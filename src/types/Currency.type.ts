@@ -1,5 +1,5 @@
 export type Currency = {
-  code: number;
+  code: string;
   color: string;
   id: number;
   image: string;
