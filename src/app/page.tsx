@@ -1,11 +1,17 @@
 import { fetchMarkets } from "@src/apiLoaders";
 import MarketViewer from "@src/components/MarketViewer";
 import { SwipeableTab } from "@src/components/SwipeableTabs";
+import Error from "./error";
 import { Market } from "@src/types";
 
 export default async function Home() {
-  // fetch data on the server and use ssr
-  const data = await fetchMarkets();
+  let data;
+  try {
+    // fetch data on the server and use ssr
+    data = await fetchMarkets();
+  } catch (e) {
+    return <Error />;
+  }
 
   // using for so that we wouldn't need to loop through data twice
   const baseToMarketMap: { [key: string]: Market[] } = {};

@@ -23,6 +23,7 @@ const transformMarket = (m: any): Market => ({
 
 export async function fetchMarkets() {
   const res = await fetch(`${apiConfigs.origin}/v1/mkt/markets/`);
+  if (!res.ok) throw new Error(res.statusText);
   const rawData = await res.json();
 
   // transform huge data to usable small data
