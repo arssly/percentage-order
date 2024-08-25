@@ -5,9 +5,11 @@ import MarketCard from "@components/MarketCard";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Pagination from "@mui/material/Pagination";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { marketConfigs } from "@src/configs";
-
+import { useSelector } from "@legendapp/state/react";
+import { selectMarketPageIndex$ } from "@src/store/market/selectors";
+import { setMarketPageIndex } from "@src/store/market/actions";
 export type MarketViewerProps = {
   base: string;
   markets: Market[];
@@ -16,18 +18,20 @@ export type MarketViewerProps = {
 const marketsPerPage = marketConfigs.marketsPerPage;
 
 export default function MarketViewer({ base, markets }: MarketViewerProps) {
-  const [page, setPage] = useState(1);
+  const page = useSelector(selectMarketPageIndex$(base)) || 1;
 
-  const handleChange = useCallback((page: number) => {
-    setPage(page);
-  }, []);
+  const handleChange = useCallback(
+    (page: number) => {
+      setMarketPageIndex(base, page);
+    },
+    [base],
+  );
 
   const marketsInView =
     markets.length <= marketsPerPage ? markets : markets.slice((page - 1) * marketsPerPage, page * marketsPerPage);
 
   return (
     <DefaultContainer>
-      {base}
       <Grid container spacing={2}>
         {marketsInView.map(market => (
           <Grid item key={market.id} xs={6} md={4}>

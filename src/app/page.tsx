@@ -8,23 +8,21 @@ export default async function Home() {
   const data = await fetchMarkets();
 
   // using for so that we wouldn't need to loop through data twice
-  const tetherMarkets: Market[] = [];
-  const tomanMarkets: Market[] = [];
+  const baseToMarketMap: { [key: string]: Market[] } = {};
   for (const market of data) {
-    if (market.currency2.code === "USDT") {
-      tetherMarkets.push(market);
-    } else if (market.currency2.code === "IRT") {
-      tomanMarkets.push(market);
-    }
+    const base = market.currency2.code;
+    if (!baseToMarketMap[base]) baseToMarketMap[base] = [];
+    baseToMarketMap[base].push(market);
   }
+
   // TODO: configure i18n
   return (
     <main>
       <SwipeableTab
-        tabs={[
-          { title: "پایه تتر", element: <MarketViewer base="tether" markets={tetherMarkets} /> },
-          { title: "پایه تومان", element: <MarketViewer base="toman" markets={tomanMarkets} /> },
-        ]}
+        tabs={Object.entries(baseToMarketMap).map(([base, markets]) => ({
+          title: markets[0].currency2.titleFA,
+          element: <MarketViewer base={base} markets={markets} />,
+        }))}
       />
     </main>
   );
