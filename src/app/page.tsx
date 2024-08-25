@@ -10,6 +10,7 @@ export default async function Home() {
     // fetch data on the server and use ssr
     data = await fetchMarkets();
   } catch (e) {
+    console.log(e);
     return <Error />;
   }
 
