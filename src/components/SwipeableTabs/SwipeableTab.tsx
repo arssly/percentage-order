@@ -27,14 +27,7 @@ export function SwipeableTab({ tabs, ariaLabel }: SwipeableTabProps) {
 
   return (
     <Box sx={{ bgcolor: "background.paper" }}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="secondary"
-        textColor="inherit"
-        variant="fullWidth"
-        aria-label={ariaLabel ?? "full width tabs"}
-      >
+      <Tabs value={value} onChange={handleChange} variant="fullWidth" aria-label={ariaLabel ?? "full width tabs"}>
         {tabs.map((tab, index) => (
           <Tab label={tab.title} key={`tab-title-${index}`} {...a11yProps(index)} />
         ))}

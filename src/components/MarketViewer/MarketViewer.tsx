@@ -10,6 +10,9 @@ import { marketConfigs } from "@src/configs";
 import { useSelector } from "@legendapp/state/react";
 import { selectMarketPageIndex$ } from "@src/store/market/selectors";
 import { setMarketPageIndex } from "@src/store/market/actions";
+
+import styles from "./marketViewer.module.scss";
+
 export type MarketViewerProps = {
   base: string;
   markets: Market[];
@@ -39,7 +42,7 @@ export default function MarketViewer({ base, markets }: MarketViewerProps) {
           </Grid>
         ))}
       </Grid>
-      <Box display="flex" justifyContent="center" sx={{ mt: 3 }}>
+      <Box className={styles.center} sx={{ mt: 3 }}>
         <Pagination
           count={Math.ceil(markets.length / marketsPerPage)}
           page={page}

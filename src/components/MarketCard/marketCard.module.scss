@@ -1,0 +1,14 @@
+.image {
+    text-align: center;
+}
+
+.priceRow{ 
+  display: flex;
+  align-items: center;
+}
+
+.oneLineText{ 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
