@@ -1,4 +1,6 @@
 "use client";
+import Link from "@mui/material/Link";
+import NextLink from "next/link";
 import { Market } from "@src/types";
 import DefaultContainer from "@components/DefaultContainer";
 import MarketCard from "@components/MarketCard";
@@ -38,7 +40,9 @@ export default function MarketViewer({ base, markets }: MarketViewerProps) {
       <Grid container spacing={2}>
         {marketsInView.map(market => (
           <Grid item key={market.id} xs={6} md={4}>
-            <MarketCard market={market} />
+            <Link href={`/markets/${market.id}`} color="inherit" underline="none" component={NextLink}>
+              <MarketCard market={market} />
+            </Link>
           </Grid>
         ))}
       </Grid>

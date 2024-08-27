@@ -13,6 +13,23 @@ const theme = createTheme({
     fontFamily: roboto.style.fontFamily,
   },
   direction: "rtl",
+  // fix styling issue with rtl pages
+  components: {
+    MuiSlider: {
+      styleOverrides: {
+        markLabel: {
+          transform: "translateX(50%)",
+          top: "10",
+        },
+        thumb: {
+          transform: "translate(50%, -50%)",
+        },
+        mark: {
+          transform: "translate(1px, -50%)",
+        },
+      },
+    },
+  },
 });
 
 export default theme;

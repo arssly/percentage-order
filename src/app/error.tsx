@@ -1,10 +1,7 @@
 "use client";
+import Error from "@src/components/ErrorComponent";
 
-import { Box } from "@mui/material";
-
-import styles from "./error.module.scss";
-
-export default function Error() {
+export default function ErrorPage() {
   const errorMessage = "مشکلی در دریافت داده پیش امده است لطفا بعدا دوباره تلاش کنید";
-  return <Box className={styles.error}>{errorMessage}</Box>;
+  return <Error message={errorMessage} />;
 }

@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import { Market } from "@src/types";
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
+import { toPrettyFarsiNumber } from "@src/utils/numbers";
 
 import styles from "./marketCard.module.scss";
 
@@ -30,7 +31,7 @@ export default function MarketCard({ market }: MarketCardProps) {
           قیمت:
         </Typography>
         <Typography variant="body2" sx={{ ml: 0.5 }}>
-          {market.price}
+          {toPrettyFarsiNumber(market.price)}
         </Typography>
         <Typography variant="body2">{market.currency2.titleFA}</Typography>
       </Box>
