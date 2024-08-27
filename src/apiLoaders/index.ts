@@ -32,7 +32,7 @@ const transformMatchedOrder = (m: any): MatchedOrder => ({
 });
 
 export async function fetchMarkets() {
-  const res = await fetch(`${apiConfigs.origin}/v1/mkt/markets/`);
+  const res = await fetch(`${apiConfigs.origin}/v1/mkt/markets/`, { mode: "no-cors" });
   if (!res.ok) throw new Error(res.statusText);
   const rawData = await res.json();
 
