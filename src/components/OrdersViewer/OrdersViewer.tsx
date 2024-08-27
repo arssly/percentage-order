@@ -42,7 +42,7 @@ export default function OrdersVeiwer({ marketId, buy, sell }: BuySellOrdersProps
     throw new Error("one and only one of buy or sell props should be true");
   }
 
-  const { data, isLoading, error } = useSWR(`actives/${marketId}/?type=${buy ? "buy" : "sell"}`, fetchOrders, {
+  const { data, isLoading, error } = useSWR({ marketId, buy: buy ? "buy" : "sell" }, fetchOrders, {
     errorRetryCount: orderConfigs.numberOfRetries,
     refreshInterval: orderConfigs.refreshEvery,
   });

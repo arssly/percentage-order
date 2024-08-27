@@ -17,7 +17,7 @@ export type MatchedOrdersProps = {
 };
 
 export default function MatchedOrders({ marketId }: MatchedOrdersProps) {
-  const { data, isLoading, error } = useSWR(`matches/${marketId}/`, fetchMatchedOrders, {
+  const { data, isLoading, error } = useSWR({ matches: "matches", marketId }, fetchMatchedOrders, {
     errorRetryCount: orderConfigs.numberOfRetries,
     refreshInterval: orderConfigs.refreshEvery,
   });

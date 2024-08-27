@@ -42,8 +42,10 @@ export async function fetchMarkets() {
   return transformedData;
 }
 
-export async function fetchOrders(restOfUrl: string) {
-  const res = await fetch(`${apiConfigs.origin}/v2/mth/${restOfUrl}`);
+export async function fetchOrders(urlParams: { marketId: number; buy: "buy" | "sell" }) {
+  // calling our own route apis mostly for cors reasons
+  // but also it's better to have your own api close to your own application
+  const res = await fetch(`${window.origin}/api/orders`, { body: JSON.stringify(urlParams), method: "POST" });
   if (!res.ok) {
     const error = new Error(res.statusText);
     error.cause = res.status;
@@ -54,8 +56,8 @@ export async function fetchOrders(restOfUrl: string) {
   return transformedData.slice(0, 10);
 }
 
-export async function fetchMatchedOrders(restOfUrl: string) {
-  const res = await fetch(`${apiConfigs.origin}/v1/mth/${restOfUrl}`);
+export async function fetchMatchedOrders(urlParams: { matches: "matches"; marketId: number }) {
+  const res = await fetch(`${window.origin}/api/matches`, { body: JSON.stringify(urlParams), method: "POST" });
   if (!res.ok) {
     const error = new Error(res.statusText);
     error.cause = res.status;
