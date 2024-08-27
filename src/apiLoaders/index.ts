@@ -32,7 +32,7 @@ const transformMatchedOrder = (m: any): MatchedOrder => ({
 });
 
 export async function fetchMarkets() {
-  const res = await fetch(`${apiConfigs.origin}/v1/mkt/markets/`);
+  const res = await fetch(`${apiConfigs.origin}/v1/mkt/markets/`, { mode: "no-cors" });
   if (!res.ok) throw new Error(res.statusText);
   const rawData = await res.json();
 
@@ -43,7 +43,7 @@ export async function fetchMarkets() {
 }
 
 export async function fetchOrders(restOfUrl: string) {
-  const res = await fetch(`${apiConfigs.origin}/v2/mth/${restOfUrl}`);
+  const res = await fetch(`${apiConfigs.origin}/v2/mth/${restOfUrl}`, { mode: "no-cors" });
   if (!res.ok) {
     const error = new Error(res.statusText);
     error.cause = res.status;
@@ -55,7 +55,7 @@ export async function fetchOrders(restOfUrl: string) {
 }
 
 export async function fetchMatchedOrders(restOfUrl: string) {
-  const res = await fetch(`${apiConfigs.origin}/v1/mth/${restOfUrl}`);
+  const res = await fetch(`${apiConfigs.origin}/v1/mth/${restOfUrl}`, { mode: "no-cors" });
   if (!res.ok) {
     const error = new Error(res.statusText);
     error.cause = res.status;
