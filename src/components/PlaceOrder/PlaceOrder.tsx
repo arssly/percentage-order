@@ -17,7 +17,7 @@ const marks = [
   { value: 100, label: "۱۰۰٪" },
 ];
 
-function calculatePlacedOrder(orders: Order[], totalRemain: Decimal, percentageValue: number) {
+export function calculatePlacedOrder(orders: Order[], totalRemain: Decimal, percentageValue: number) {
   if (percentageValue > 100 || percentageValue < 0) throw new Error("invalid value");
 
   const totalNeededRemain = totalRemain.mul(percentageValue).div(100);
@@ -92,15 +92,15 @@ export default function PlaceOrder({ orders, totalRemain }: PlaceOrderProps) {
       </Box>
       <Box className={styles.orderResults} sx={{ gap: 1 }}>
         <Typography variant="body1">برای سفارش درخواستی، مقدار ارزش کل برابر با</Typography>
-        <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+        <Typography variant="body1" sx={{ fontWeight: "bold" }} data-testid="total-value">
           {toPrettyFarsiNumber(placedOrder.totalValue.toFixed(orderConfigs.numberOfFixedPoints))}
         </Typography>
         <Typography variant="body1"> با میانگین قیمت</Typography>
-        <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+        <Typography variant="body1" sx={{ fontWeight: "bold" }} data-testid="average-price">
           {toPrettyFarsiNumber(placedOrder.price.toFixed(orderConfigs.numberOfFixedPoints))}
         </Typography>
         <Typography variant="body1">و مقدار کل</Typography>
-        <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+        <Typography variant="body1" sx={{ fontWeight: "bold" }} data-testid="total-remain">
           {toPrettyFarsiNumber(placedOrder.remain.toFixed(orderConfigs.numberOfFixedPoints))}
         </Typography>
       </Box>

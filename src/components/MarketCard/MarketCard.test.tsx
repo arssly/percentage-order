@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Market } from "@src/types";
 import MarketCard from "./MarketCard";
+import { toPrettyFarsiNumber } from "@src/utils/numbers";
 
 test("MarketCard", () => {
   const market: Market = {
@@ -31,9 +32,9 @@ test("MarketCard", () => {
   render(<MarketCard market={market} />);
 
   // check image
-  expect(screen.getByAltText(market.currency1.title, { exact: false })).toBeInTheDocument();
+  expect(screen.queryByAltText(market.currency1.title, { exact: false })).toBeInTheDocument();
   // check header
-  expect(screen.getByRole("heading")).toHaveTextContent(market.titleFA);
+  expect(screen.queryByRole("heading")).toHaveTextContent(market.titleFA);
   // check price
-  expect(screen.getByText(market.price)).toBeInTheDocument();
+  expect(screen.queryByText(toPrettyFarsiNumber(market.price))).toBeInTheDocument();
 });
